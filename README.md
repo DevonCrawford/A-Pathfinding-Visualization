@@ -1,4 +1,4 @@
-# A-Pathfinding
+# A* Pathfinding Visualization
 
 Pathfinding has always interested me. This is my first attempt at A* pathfinding. My algorithm has slight modifications to increase efficiency. I came up with the idea to use sine and cosine functions to search for open nodes when the pathfinding is
 set to non-diagonal mode. Making it about twice as fast in those conditions.
