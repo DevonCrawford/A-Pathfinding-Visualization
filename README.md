@@ -23,10 +23,10 @@ Simply check the "diagonal" box at the bottom left of the screen.
 ![diagonal-vs-non-diagonal](https://cloud.githubusercontent.com/assets/25334129/22450200/fd49d752-e732-11e6-9684-f9284486d6eb.gif)
 
 ## Show Steps or Timed Efficiency
-You may choose to view a step-by-step process of the algorithm by selecting "showSteps" box at the bottom right. 
+You may choose to view a step-by-step process of the algorithm by selecting "showSteps" box at the bottom left. 
   - If showSteps is false, the algorithm will skip visuals until the end, and process as fast as possible. 
   
-This is useful for when you want to analyze the efficiency of my algorithm in different coniditons. The example below shows "showSteps" as false, where it times the algorithm and outputs "Completed in 4ms" at the bottom right. 
+This is useful for when you want to analyze the efficiency of my algorithm in different coniditons. The example below shows "showSteps" as false, where it times the algorithm and outputs "Completed in 4ms" at the bottom left. 
 
 ![showsteps](https://cloud.githubusercontent.com/assets/25334129/22450236/2f7d1d9c-e733-11e6-87ea-60bc0ecac146.gif)
 
