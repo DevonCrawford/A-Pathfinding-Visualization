@@ -22,7 +22,7 @@ Simply check the "diagonal" box at the bottom left of the screen.
 
 ![diagonal-vs-non-diagonal](https://cloud.githubusercontent.com/assets/25334129/22450200/fd49d752-e732-11e6-9684-f9284486d6eb.gif)
 
-## Show Steps
+## Show Steps or Timed Efficiency
 You may choose to view a step-by-step process of the algorithm by selecting "showSteps" box at the bottom right. 
   - If showSteps is false, the algorithm will skip visuals until the end, and process as fast as possible. 
   
