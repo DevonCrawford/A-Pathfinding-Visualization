@@ -2,7 +2,7 @@
 
 This is my first attempt at A* pathfinding. I made this visualization to show the beauty of pathfinding. You can modify all major features of my algorithm through the graphics interface. Here I will go through the major features of my program:
 
-# Basic Controls
+# H1 Basic Controls
 You must create a map to start the pathfinding. The start node is blue, end node is red and the walls are black. 
 To create nodes:
   - Start: hold 's' + left click
