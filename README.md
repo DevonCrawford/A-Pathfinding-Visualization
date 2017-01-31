@@ -24,7 +24,7 @@ Simply check the "diagonal" box at the bottom left of the screen.
 
 ## Show Steps
 You may choose to view a step-by-step process of the algorithm by selecting "showSteps" box at the bottom right. 
-  - If show steps is false, the algorithm will skip visuals until the end, and process as fast as possible. 
+  - If showSteps is false, the algorithm will skip visuals until the end, and process as fast as possible. 
   
 This is useful for when you want to analyze the efficiency of my algorithm in different coniditons. The example below shows "showSteps" as false, where it times the algorithm and outputs "Completed in 4ms" at the bottom right. 
 
