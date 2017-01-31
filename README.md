@@ -10,7 +10,7 @@ To create nodes:
   - Wall: left click
   
 To delete nodes:
-  - right click
+  - same as creation, except right click!
   
 ![basic-controls](https://cloud.githubusercontent.com/assets/25334129/22450191/f433bb24-e732-11e6-8004-19b923cf4d08.gif)
    
