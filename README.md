@@ -15,18 +15,26 @@ To delete nodes:
   
 ![basic-controls](https://cloud.githubusercontent.com/assets/25334129/22450191/f433bb24-e732-11e6-8004-19b923cf4d08.gif)
 
-## Diagonal??
-My algorithm supports diagonal pathfinding and non diagonal pathfinding. Simply check the "diagonal" box at the bottom left of the screen.
+## Diagonal
+My algorithm supports diagonal pathfinding and non diagonal pathfinding. 
+
+Simply check the "diagonal" box at the bottom left of the screen.
 
 ![diagonal-vs-non-diagonal](https://cloud.githubusercontent.com/assets/25334129/22450200/fd49d752-e732-11e6-9684-f9284486d6eb.gif)
 
 ## Show Steps
-You may choose to view a step-by-step process of the algorithm by selecting "showSteps" box at the bottom right. If show steps is false, the algorithm will skip visuals until the end, and process as fast as possible. This is useful for when you want to analyze the efficiency of my algorithm in different coniditons. The example below shows "showSteps" as false, where it times the algorithm and outputs "Completed in 4ms" at the bottom right. 
+You may choose to view a step-by-step process of the algorithm by selecting "showSteps" box at the bottom right. 
+  - If show steps is false, the algorithm will skip visuals until the end, and process as fast as possible. 
+  
+This is useful for when you want to analyze the efficiency of my algorithm in different coniditons. The example below shows "showSteps" as false, where it times the algorithm and outputs "Completed in 4ms" at the bottom right. 
 
 ![showsteps](https://cloud.githubusercontent.com/assets/25334129/22450236/2f7d1d9c-e733-11e6-87ea-60bc0ecac146.gif)
 
 ## Variable Speed
-You may change the speed of the visualization during runtime. By default, speed is 50%. Notice: speed only works when showSteps is true. Remember, if showSteps is false, then the algorithm will skip visuals and process the pathfinding as fast as possible.
+You may change the speed of the visualization during runtime. 
+  - By default, speed is 50%. 
+
+Notice: speed only works when showSteps is true. Remember, if showSteps is false, then the algorithm will skip visuals and process the pathfinding as fast as possible.
 
 ![variable-speed](https://cloud.githubusercontent.com/assets/25334129/22450222/21257c12-e733-11e6-8b50-7730ba4ca06e.gif)
 
