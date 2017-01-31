@@ -1,4 +1,11 @@
 
+/* Node.java is an object used for every node (or block)
+ * on the grid for path finding. Including walls, open, closed
+ * path, start and end nodes. This class allows each node to
+ * store its position, calculations (f, g, h), parents, and
+ * determine equalities to other nodes.
+ * by Devon Crawford
+ */
 public class Node {
 	private int x, y, g, h, f;
 	private Node parent;

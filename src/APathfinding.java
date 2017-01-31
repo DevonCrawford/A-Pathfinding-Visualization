@@ -2,10 +2,11 @@ import java.util.ArrayList;
 
 public class APathfinding {
 	private int size, diagonalMoveCost;
+	private long runTime;
 	private double kValue;
 	private Frame frame;
-	private Node startNode, endNode, parent;
-	private boolean diagonal, running, noPath, complete;
+	private Node startNode, endNode, par;
+	private boolean diagonal, running, noPath, complete, trig;
 	private ArrayList<Node> borders, open, closed, path;
 	private Sort sort = new Sort();
 
@@ -15,7 +16,7 @@ public class APathfinding {
 		diagonalMoveCost = (int) (Math.sqrt(2 * (Math.pow(size, 2))));
 		kValue = Math.PI / 2;
 		diagonal = true;
-		parent = startNode;
+		trig = false;
 		running = false;
 		complete = false;
 
@@ -32,7 +33,7 @@ public class APathfinding {
 		diagonalMoveCost = (int) (Math.sqrt(2 * (Math.pow(size, 2))));
 		kValue = Math.PI / 2;
 		diagonal = true;
-		parent = startNode;
+		trig = false;
 		running = false;
 		complete = false;
 
@@ -50,7 +51,7 @@ public class APathfinding {
 
 		diagonalMoveCost = (int) (Math.sqrt(2 * (Math.pow(size, 2))));
 		diagonal = true;
-		parent = startNode;
+		trig = false;
 		running = false;
 		complete = false;
 
@@ -64,7 +65,6 @@ public class APathfinding {
 		running = true;
 		startNode = s;
 		startNode.setG(0);
-		parent = startNode;
 		endNode = e;
 
 		// Adding the starting node to the closed list
@@ -72,13 +72,11 @@ public class APathfinding {
 
 		long startTime = System.currentTimeMillis();
 
-		while (running) {
-			update();
-		}
+		findPath(startNode);
 
 		complete = true;
 		long endTime = System.currentTimeMillis();
-		long runTime = endTime - startTime;
+		runTime = endTime - startTime;
 		System.out.println("Completed: " + runTime + "ms");
 	}
 	
@@ -86,7 +84,7 @@ public class APathfinding {
 		running = true;
 		startNode = s;
 		startNode.setG(0);
-		parent = startNode;
+		par = startNode;
 		endNode = e;
 
 		// Adding the starting node to the closed list
@@ -118,12 +116,28 @@ public class APathfinding {
 		return endNode;
 	}
 	
+	public Node getPar() {
+		return par;
+	}
+	
 	public boolean isNoPath() {
 		return noPath;
+	}
+	
+	public boolean isDiagonal() {
+		return diagonal;
+	}
+	
+	public boolean isTrig() {
+		return trig;
 	}
 
 	public void setDiagonal(boolean d) {
 		diagonal = d;
+	}
+	
+	public void setTrig(boolean t) {
+		trig = t;
 	}
 
 	public void setSize(int s) {
@@ -131,7 +145,7 @@ public class APathfinding {
 		diagonalMoveCost = (int) (Math.sqrt(2 * (Math.pow(size, 2))));
 	}
 
-	public void update() {
+	public void findPath(Node parent) {
 		Node openNode = null;
 		
 		if (diagonal) {
@@ -157,17 +171,34 @@ public class APathfinding {
 						continue;
 					}
 
-					calculateNodeValues(possibleX, possibleY, openNode);
+					calculateNodeValues(possibleX, possibleY, openNode, parent);
 				}
 			}
-		} else {
+		} 
+		else if (!trig) {
+			// Detects and adds one step of nodes to open list
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 3; j++) {
+					if((i == 0 && j == 0) || (i == 0 && j == 2) || 
+						(i == 1 && j == 1) || (i == 2 && j == 0) ||
+						(i == 2 && j == 2)) {
+						continue;
+					}
+					int possibleX = (parent.getX() - size) + (size * i);
+					int possibleY = (parent.getY() - size) + (size * j);
+
+					calculateNodeValues(possibleX, possibleY, openNode, parent);
+				}
+			}
+		}
+		else {
 			for (int i = 0; i < 4; i++) {
 				// Uses cosine and sine functions to get circle of points
 				// around parent
 				int possibleX = (int) Math.round(parent.getX() + (-size * Math.cos(kValue * i)));
 				int possibleY = (int) Math.round(parent.getY() + (-size * Math.sin(kValue * i)));
 
-				calculateNodeValues(possibleX, possibleY, openNode);
+				calculateNodeValues(possibleX, possibleY, openNode, parent);
 			}
 		}
 		// frame.repaint();
@@ -236,11 +267,17 @@ public class APathfinding {
 				}
 			}
 		}
+		if(!frame.showSteps()) {
+			findPath(parent);
+		}
+		else {
+			par = parent;
+		}
 	}
 
-	public void calculateNodeValues(int possibleX, int possibleY, Node openNode) {
+	public void calculateNodeValues(int possibleX, int possibleY, Node openNode, Node parent) {
 		// If the coordinates are outside of the borders
-		if (possibleX < 0 | possibleY < 0 | possibleX > frame.getWidth() | possibleY > frame.getHeight()) {
+		if (possibleX < 0 | possibleY < 0 | possibleX >= frame.getWidth() | possibleY >= frame.getHeight()) {
 			return;
 		}
 
@@ -465,6 +502,27 @@ public class APathfinding {
 
 	public ArrayList<Node> getPathList() {
 		return path;
+	}
+	
+	public long getRunTime() {
+		return runTime;
+	}
+	
+	public void reset() {
+		while(open.size() > 0) {
+			open.remove(0);
+		}
+		
+		while(closed.size() > 0) {
+			closed.remove(0);
+		}
+		
+		while(path.size() > 0) {
+			path.remove(0);
+		}
+		noPath = false;
+		running = false;
+		complete = false;
 	}
 
 	public Node getOpenNode(int x, int y) {
