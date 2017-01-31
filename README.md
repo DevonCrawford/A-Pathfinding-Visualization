@@ -16,7 +16,7 @@ To delete nodes:
 ![basic-controls](https://cloud.githubusercontent.com/assets/25334129/22450191/f433bb24-e732-11e6-8004-19b923cf4d08.gif)
 
 ## Diagonal
-My algorithm supports diagonal pathfinding and non diagonal pathfinding. 
+My algorithm supports diagonal and non diagonal pathfinding. 
 
 Simply check the "diagonal" box at the bottom left of the screen.
 
