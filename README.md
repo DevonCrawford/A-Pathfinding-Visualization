@@ -1,15 +1,17 @@
 # A* Pathfinding Visualization
 
-Pathfinding has always interested me. This is my first attempt at A* pathfinding. My algorithm has slight modifications to increase efficiency. I came up with the idea to use sine and cosine functions to search for open nodes when the pathfinding is
-set to non-diagonal mode. Making it about twice as fast in those conditions.
+This is my first attempt at A* pathfinding. I made this visualization to show the beauty of pathfinding. You can modify all major features of my algorithm through the graphics interface. Here I will go through the major features of my program:
 
-I made this visualization to show the beauty of pathfinding. There are two major modes for this algorithm: 
-  - showSteps [True == visualization, False ignores visuals until the algorithm has processed,
-     allowing it to output a timed result of the algorithm. Useful to test efficiency]
-  - setDiagonal [True == diagonal creation (max 8), False != diagonal creation (max 4)]
+# Basic Controls
+You must create a map to start the pathfinding. The start node is blue, end node is red and the walls are black. 
+To create nodes:
+  - Start: hold 's' + left click
+  - End: hold 'e' + left click
+  - Wall: left click
   
-Both of these settings may be changed in the "Frame.java" class. 
-  - showSteps is simply a boolean variable initialized in the constructor
-  - setDiagonal is a method in the APathfinding object
+To delete nodes:
+  - right click
+  
+![basic-controls](https://cloud.githubusercontent.com/assets/25334129/22450191/f433bb24-e732-11e6-8004-19b923cf4d08.gif)
    
   a project by Devon Crawford.
