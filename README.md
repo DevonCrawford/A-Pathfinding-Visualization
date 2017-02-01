@@ -34,7 +34,9 @@ This is useful for when you want to analyze the efficiency of my algorithm in di
 You may change the speed of the visualization during runtime. 
   - By default, speed is 50%. 
 
-Notice: speed only works when showSteps is true. Remember, if showSteps is false, then the algorithm will skip visuals and process the pathfinding as fast as possible.
+Notice: speed only works when showSteps is true. 
+
+Remember, if showSteps is false, then the algorithm will skip visuals and process the pathfinding as fast as possible.
 
 ### Complicated Stuff
 Those are the basics! Now you can be free to make the map as complicated as you desire. (Not really, because making the map too large will crash the stack). But go ahead! 
