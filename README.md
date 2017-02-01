@@ -46,4 +46,4 @@ Those are the basics! Now you can be free to make the map as complicated as you 
 ### Zoom
 You can (kind of) zoom in and out. I wouldn't really advise it. It does not zoom into your mouse, only towards the top left corner, and making the map too big will crash the program. This needs some work. However, If you zoom in far enough you can view each nodes information. The top left is the "F cost", bottom left is "G cost" and bottom right is "H cost". I will work on properly implementing a zoom feature soon.
    
-  a project by Devon Crawford.
+*a project by Devon Crawford.*
