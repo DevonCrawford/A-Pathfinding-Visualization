@@ -36,8 +36,6 @@ You may change the speed of the visualization during runtime.
 
 Notice: speed only works when showSteps is true. Remember, if showSteps is false, then the algorithm will skip visuals and process the pathfinding as fast as possible.
 
-![variable-speed](https://cloud.githubusercontent.com/assets/25334129/22450222/21257c12-e733-11e6-8b50-7730ba4ca06e.gif)
-
 ### Complicated Stuff
 Those are the basics! Now you can be free to make the map as complicated as you desire. (Not really, because making the map too large will crash the stack). But go ahead! 
 
