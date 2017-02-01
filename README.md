@@ -22,6 +22,14 @@ Simply check the "diagonal" box at the bottom left of the screen.
 
 ![diagonal-vs-non-diagonal](https://cloud.githubusercontent.com/assets/25334129/22450200/fd49d752-e732-11e6-9684-f9284486d6eb.gif)
 
+### Variable Speed
+You may change the speed of the visualization during runtime. 
+  - By default, speed is 50%. 
+
+Notice: speed only works when showSteps is true. 
+
+if showSteps is false, well, that leads into the next section.. 
+
 ### Show Steps or Timed Efficiency
 You may choose to view a step-by-step process of the algorithm by selecting "showSteps" box at the bottom left. 
   - If showSteps is false, the algorithm will skip visuals until the end, and process as fast as possible. 
@@ -29,14 +37,6 @@ You may choose to view a step-by-step process of the algorithm by selecting "sho
 This is useful for when you want to analyze the efficiency of my algorithm in different coniditons. The example below shows "showSteps" as false, where it times the algorithm and outputs "Completed in 4ms" at the bottom left. 
 
 ![showsteps](https://cloud.githubusercontent.com/assets/25334129/22450236/2f7d1d9c-e733-11e6-87ea-60bc0ecac146.gif)
-
-### Variable Speed
-You may change the speed of the visualization during runtime. 
-  - By default, speed is 50%. 
-
-Notice: speed only works when showSteps is true. 
-
-Remember, if showSteps is false, then the algorithm will skip visuals and process the pathfinding as fast as possible.
 
 ### Complicated Stuff
 Those are the basics! Now you can be free to make the map as complicated as you desire. (Not really, because making the map too large will crash the stack). But go ahead! 
