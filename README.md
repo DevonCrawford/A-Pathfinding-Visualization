@@ -39,7 +39,7 @@ This is useful for when you want to analyze the efficiency of my algorithm in di
 ![showsteps](https://cloud.githubusercontent.com/assets/25334129/22450236/2f7d1d9c-e733-11e6-87ea-60bc0ecac146.gif)
 
 ### Complicated Stuff
-Those are the basics! Now you can be free to make the map as complicated as you desire. (Not really, because making the map too large will crash the stack). But go ahead! 
+Those are the basics! Now you can be free to make the map as complicated as you desire. (Not really, because making the map too large will overflow the stack). But go ahead! 
 
 ![complicated-drawings](https://cloud.githubusercontent.com/assets/25334129/22450232/2b790d14-e733-11e6-8a91-4b4cba372f9b.gif)
 
