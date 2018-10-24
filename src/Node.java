@@ -6,10 +6,10 @@
  * determine equalities to other nodes.
  * by Devon Crawford
  */
-public class Node {
+public class Node implements Comparable<Node> {
 	private int x, y, g, h, f;
 	private Node parent;
-	
+
 	public Node(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -38,7 +38,7 @@ public class Node {
 	public Node getNode() {
 		return parent;
 	}
-	
+
 	public Node getParent() {
 		return parent;
 	}
@@ -64,10 +64,20 @@ public class Node {
 		this.parent = parent;
 	}
 
-	public static boolean isEqual(Node s, Node e) {
-		if (s.getX() == e.getX() && s.getY() == e.getY()) {
-			return true;
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Node) {
+			Node that = (Node) obj;
+
+			if (this.getX() == that.getX() && this.getY() == that.getY()) {
+				return true;
+			}
 		}
 		return false;
+	}
+
+	@Override
+	public int compareTo(Node that) {
+		return that.getF() - this.getF();
 	}
 }
