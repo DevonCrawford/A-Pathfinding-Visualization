@@ -34,7 +34,7 @@ public class Frame extends JPanel
 	char currentKey = (char) 0;
 	Node startNode, endNode;
 	String mode;
-	
+
 	Timer timer = new Timer(100, this);
 	int r = randomWithRange(0, 255);
 	int G = randomWithRange(0, 255);
@@ -61,11 +61,11 @@ public class Frame extends JPanel
 		// Set up pathfinding
 		pathfinding = new APathfinding(this, size);
 		pathfinding.setDiagonal(true);
-		
+
 		// Calculating value of a in speed function 1
-		a1 = (5000.0000 / (Math.pow(25.0000/5000, 1/49)));
+		a1 = (5000.0000 / (Math.pow(25.0000 / 5000, 1 / 49)));
 		a2 = 625.0000;
-		
+
 		// Set up window
 		window = new JFrame();
 		window.setContentPane(this);
@@ -75,21 +75,21 @@ public class Frame extends JPanel
 		window.pack();
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
-		
+
 		// Add all controls
 		ch.addAll();
-		
+
 		this.revalidate();
 		this.repaint();
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
 		// Grab dimensions of panel
 		int height = getHeight();
 		int width = getWidth();
-		
+
 		// If no path is found
 		if (pathfinding.isNoPath()) {
 			// Set timer for animation
@@ -98,10 +98,10 @@ public class Frame extends JPanel
 
 			// Set text of "run" button to "clear"
 			ch.getB("run").setText("clear");
-			
+
 			// Set mode to "No Path"
 			mode = "No Path";
-			
+
 			// Set up flicker animation
 			Color flicker = new Color(r, G, b);
 			g.setColor(flicker);
@@ -118,7 +118,7 @@ public class Frame extends JPanel
 		if (pathfinding.isComplete()) {
 			// Set run button to clear
 			ch.getB("run").setText("clear");
-			
+
 			// Set timer delay, start for background animation
 			timer.setDelay(50);
 			timer.start();
@@ -127,12 +127,11 @@ public class Frame extends JPanel
 			Color flicker = new Color(r, G, b);
 			g.setColor(flicker);
 			g.fillRect(0, 0, getWidth(), getHeight());
-			
+
 			// Set completed mode
-			if(showSteps) {
+			if (showSteps) {
 				mode = "Completed";
-			}
-			else {
+			} else {
 				mode = "Completed in " + pathfinding.getRunTime() + "ms";
 			}
 		}
@@ -190,44 +189,42 @@ public class Frame extends JPanel
 			g.setColor(Color.red);
 			g.fillRect(endNode.getX() + 1, endNode.getY() + 1, size - 1, size - 1);
 		}
-		
+
 		// If control panel is being hovered, change colours
-		if(btnHover) {
+		if (btnHover) {
 			g.setColor(style.darkText);
 			ch.hoverColour();
-		}
-		else {
+		} else {
 			g.setColor(style.btnPanel);
 			ch.nonHoverColour();
 		}
 		// Drawing control panel rectangle
-		g.fillRect(10, height-96, 322, 90);
+		g.fillRect(10, height - 96, 322, 90);
 
 		// Setting mode text
 		ch.getL("modeText").setText("Mode: " + mode);
-		
+
 		// Position all controls
 		ch.position();
-		
+
 		// Setting numbers in pathfinding lists
 		ch.getL("openC").setText(Integer.toString(pathfinding.getOpenList().size()));
 		ch.getL("closedC").setText(Integer.toString(pathfinding.getClosedList().size()));
 		ch.getL("pathC").setText(Integer.toString(pathfinding.getPathList().size()));
-				
+
 		// Setting speed number text in showSteps or !showSteps mode
-		if(showSteps) {
+		if (showSteps) {
 			ch.getL("speedC").setText(Integer.toString(ch.getS("speed").getValue()));
-		}
-		else {
+		} else {
 			ch.getL("speedC").setText("N/A");
 		}
-					
+
 		// Getting values from checkboxes
 		showSteps = ch.getC("showStepsCheck").isSelected();
 		pathfinding.setDiagonal(ch.getC("diagonalCheck").isSelected());
 		pathfinding.setTrig(ch.getC("trigCheck").isSelected());
 	}
-	
+
 	// Draws info (f, g, h) on current node
 	public void drawInfo(Node current, Graphics g) {
 		if (size > 50) {
@@ -245,39 +242,52 @@ public class Frame extends JPanel
 		if (SwingUtilities.isLeftMouseButton(e)) {
 			// If 's' is pressed create start node
 			if (currentKey == 's') {
-				int xRollover = e.getX() % size;
-				int yRollover = e.getY() % size;
+
+				int xPosition = e.getX() - (e.getX() % size);
+				int yPosition = e.getY() - (e.getY() % size);
+
+				// Remove any pre-existing wall
+				pathfinding.removeBorder(new Node(xPosition, yPosition));
 
 				if (startNode == null) {
-					startNode = new Node(e.getX() - xRollover, e.getY() - yRollover);
+					startNode = new Node(xPosition, yPosition);
 				} else {
-					startNode.setXY(e.getX() - xRollover, e.getY() - yRollover);
+					startNode.setXY(xPosition, yPosition);
 				}
 				repaint();
-			} 
+			}
 			// If 'e' is pressed create end node
 			else if (currentKey == 'e') {
-				int xRollover = e.getX() % size;
-				int yRollover = e.getY() % size;
+
+				int xPosition = e.getX() - (e.getX() % size);
+				int yPosition = e.getY() - (e.getY() % size);
+
+				// Remove any pre-existing wall
+				pathfinding.removeBorder(new Node(xPosition, yPosition));
 
 				if (endNode == null) {
-					endNode = new Node(e.getX() - xRollover, e.getY() - yRollover);
+					endNode = new Node(xPosition, yPosition);
 				} else {
-					endNode.setXY(e.getX() - xRollover, e.getY() - yRollover);
+					endNode.setXY(xPosition, yPosition);
 				}
 				repaint();
-			} 
+			}
 			// Otherwise, create a wall
 			else {
 				int xBorder = e.getX() - (e.getX() % size);
 				int yBorder = e.getY() - (e.getY() % size);
 
 				Node newBorder = new Node(xBorder, yBorder);
-				pathfinding.addBorder(newBorder);
+				
+				// A new wall is added only if the end doesn't exist yet OR if the new border
+				// doesn't overlap the end
+				if (pathfinding.getEnd() == null || !pathfinding.getEnd().equals(newBorder)) {
+					pathfinding.addBorder(newBorder);
+				}
 
 				repaint();
 			}
-		} 
+		}
 		// If right mouse button is clicked
 		else if (SwingUtilities.isRightMouseButton(e)) {
 			int mouseBoxX = e.getX() - (e.getX() % size);
@@ -289,14 +299,14 @@ public class Frame extends JPanel
 					startNode = null;
 					repaint();
 				}
-			} 
+			}
 			// If 'e' is pressed remove end node
 			else if (currentKey == 'e') {
 				if (endNode != null && mouseBoxX == endNode.getX() && endNode.getY() == mouseBoxY) {
 					endNode = null;
 					repaint();
 				}
-			} 
+			}
 			// Otherwise, remove wall
 			else {
 				int Location = pathfinding.searchBorder(mouseBoxX, mouseBoxY);
@@ -314,16 +324,20 @@ public class Frame extends JPanel
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {
+	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {
+	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {
+	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {
+	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -336,19 +350,19 @@ public class Frame extends JPanel
 		int x = e.getX();
 		int y = e.getY();
 		int height = this.getHeight();
-		
+
 		// Detects if mouse is within button panel
-		if(x >= 10 && x <= 332 && y >= (height-96) && y <= (height-6)) {
+		if (x >= 10 && x <= 332 && y >= (height - 96) && y <= (height - 6)) {
 			btnHover = true;
-		}
-		else {
+		} else {
 			btnHover = false;
 		}
 		repaint();
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {}
+	public void keyTyped(KeyEvent e) {
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -361,15 +375,15 @@ public class Frame extends JPanel
 			start();
 		}
 	}
-	
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 		currentKey = (char) 0;
 	}
-	
+
 	// Starts path finding
 	void start() {
-		if(startNode != null && endNode != null) {
+		if (startNode != null && endNode != null) {
 			if (!showSteps) {
 				pathfinding.start(startNode, endNode);
 			} else {
@@ -377,12 +391,11 @@ public class Frame extends JPanel
 				setSpeed();
 				timer.start();
 			}
-		}
-		else {
+		} else {
 			System.out.println("ERROR: Needs start and end points to run.");
 		}
 	}
-	
+
 	@Override
 	// Scales the map with mouse wheel scroll
 	public void mouseWheelMoved(MouseWheelEvent m) {
@@ -450,7 +463,7 @@ public class Frame extends JPanel
 			r = (int) (Math.random() * ((r + 15) - (r - 15)) + (r - 15));
 			G = (int) (Math.random() * ((G + 15) - (G - 15)) + (G - 15));
 			b = (int) (Math.random() * ((b + 15) - (b - 15)) + (b - 15));
-			
+
 			if (r >= 240 | r <= 15) {
 				r = randomWithRange(0, 255);
 			}
@@ -461,66 +474,58 @@ public class Frame extends JPanel
 				b = randomWithRange(0, 255);
 			}
 		}
-		
+
 		// Actions of run/stop/clear button
-		if(e.getActionCommand() != null) {
-			if(e.getActionCommand().equals("run") && !pathfinding.isRunning()) {
+		if (e.getActionCommand() != null) {
+			if (e.getActionCommand().equals("run") && !pathfinding.isRunning()) {
 				ch.getB("run").setText("stop");
 				start();
-			}
-			else if(e.getActionCommand().equals("clear")) {
+			} else if (e.getActionCommand().equals("clear")) {
 				ch.getB("run").setText("run");
 				mode = "Map Creation";
 				ch.getL("noPathT").setVisible(false);
 				pathfinding.reset();
-			}
-			else if(e.getActionCommand().equals("stop")) {
+			} else if (e.getActionCommand().equals("stop")) {
 				ch.getB("run").setText("start");
 				timer.stop();
-			}
-			else if(e.getActionCommand().equals("start")) {
+			} else if (e.getActionCommand().equals("start")) {
 				ch.getB("run").setText("stop");
 				timer.start();
 			}
 		}
 		repaint();
 	}
-	
+
 	// Returns random number between min and max
-	int randomWithRange(int min, int max)
-	{
-	   int range = (max - min) + 1;     
-	   return (int)(Math.random() * range) + min;
+	int randomWithRange(int min, int max) {
+		int range = (max - min) + 1;
+		return (int) (Math.random() * range) + min;
 	}
-	
+
 	// Calculates delay with two exponential functions
 	void setSpeed() {
 		int delay = 0;
 		int value = ch.getS("speed").getValue();
-		
-		if(value == 0) {
+
+		if (value == 0) {
 			timer.stop();
-		}
-		else if(value >= 1 && value < 50) {
-			if(!timer.isRunning()) {
+		} else if (value >= 1 && value < 50) {
+			if (!timer.isRunning()) {
 				timer.start();
 			}
 			// Exponential function. value(1) == delay(5000). value (50) == delay(25)
-			delay = (int)(a1 * (Math.pow(25/5000.0000, value / 49.0000)));
-		}
-		else if(value >= 50 && value <= 100) {
-			if(!timer.isRunning()) {
+			delay = (int) (a1 * (Math.pow(25 / 5000.0000, value / 49.0000)));
+		} else if (value >= 50 && value <= 100) {
+			if (!timer.isRunning()) {
 				timer.start();
 			}
 			// Exponential function. value (50) == delay(25). value(100) == delay(1).
-			delay = (int)(a2 * (Math.pow(1/25.0000, value/50.0000)));
+			delay = (int) (a2 * (Math.pow(1 / 25.0000, value / 50.0000)));
 		}
 		timer.setDelay(delay);
 	}
-	
+
 	boolean showSteps() {
 		return showSteps;
 	}
 }
-
-

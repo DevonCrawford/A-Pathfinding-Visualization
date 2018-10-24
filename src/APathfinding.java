@@ -377,6 +377,9 @@ public class APathfinding {
 	public void removeBorder(int location) {
 		borders.remove(location);
 	}
+	public void removeBorder(Node node) {
+		borders.remove(node	);
+	}
 
 	public void removeOpen(int location) {
 		open.remove(location);
