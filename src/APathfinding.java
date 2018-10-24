@@ -8,7 +8,6 @@ public class APathfinding {
 	private Node startNode, endNode, par;
 	private boolean diagonal, running, noPath, complete, trig;
 	private ArrayList<Node> borders, open, closed, path;
-	private Sort sort = new Sort();
 
 	public APathfinding(int size) {
 		this.size = size;
@@ -478,8 +477,7 @@ public class APathfinding {
 
 	public Node lowestFCost() {
 		if (open.size() > 0) {
-			sort.bubbleSort(open);
-			return open.get(0);
+			return open.stream().max(Node::compareTo).get();
 		}
 		return null;
 	}

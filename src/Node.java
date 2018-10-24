@@ -6,7 +6,7 @@
  * determine equalities to other nodes.
  * by Devon Crawford
  */
-public class Node {
+public class Node implements Comparable<Node>{
 	private int x, y, g, h, f;
 	private Node parent;
 	
@@ -69,5 +69,10 @@ public class Node {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int compareTo(Node that) {
+		return that.getF() - this.getF();
 	}
 }
