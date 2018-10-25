@@ -478,7 +478,7 @@ public class APathfinding {
 
 	public Node lowestFCost() {
 		if (open.size() > 0) {
-			sort.bubbleSort(open);
+			sort.selectionSort(open);
 			return open.get(0);
 		}
 		return null;

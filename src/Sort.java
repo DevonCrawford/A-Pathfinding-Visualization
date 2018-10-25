@@ -13,6 +13,63 @@ public class Sort {
 		lowToHigh = true;
 		highToLow = false;
 	}
+        
+        public void selectionSort(int[] data){
+            if(lowToHigh){
+                    for(int i = 0; i < data.length; i++){
+                        int minIndex = i;
+                        for (int j = i; j < data.length; j++) {
+                                if(data[minIndex] > data[j]){
+                                    minIndex = j;
+                                }
+                        }
+                        int temp = data[i];
+                        data[i] = data[minIndex];
+                        data[minIndex] = temp;
+                }
+            }else if(highToLow){
+                    for(int i = 0; i < data.length; i++){
+                            int minIndex = i;
+                            for (int j = i; j < data.length; j++) {
+                                    if(data[minIndex] < data[j]){
+                                        minIndex = j;
+                                    }
+                            }
+                            int temp = data[i];
+                            data[i] = data[minIndex];
+                            data[minIndex] = temp;
+                    }
+            }
+                
+        }
+        
+        public void selectionSort(ArrayList<Node> list){
+                if(lowToHigh){
+                        for(int i = 0; i < list.size(); i++){
+                                int minIndex = i;
+                                for (int j = i; j < list.size(); j++) {
+                                        if(list.get(minIndex).getF() > list.get(j).getF()){
+                                            minIndex = j;
+                                        }
+                                }
+                                Node temp = list.get(i);
+                                list.set(i, list.get(minIndex));
+                                list.set(minIndex, temp);
+                        }
+                }else if(highToLow){
+                        for(int i = 0; i < list.size(); i++){
+                                int minIndex = i;
+                                for (int j = i; j < list.size(); j++) {
+                                        if(list.get(minIndex).getF() < list.get(j).getF()){
+                                            minIndex = j;
+                                        }
+                                }
+                                Node temp = list.get(i);
+                                list.set(i, list.get(minIndex));
+                                list.set(minIndex, temp);
+                        }
+                }
+        }
 
 	public void bubbleSort(int[] data) {
 		int Switch = -1;
