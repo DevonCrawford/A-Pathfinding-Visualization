@@ -266,10 +266,12 @@ public class Frame extends JPanel
 			else if (currentKey == 'e') {
 				int xRollover = e.getX() % size;
 				int yRollover = e.getY() % size;
-
+				int location = pathfinding.searchBorder(mouseBoxX, mouseBoxY);
 				if (endNode == null) {
+					if(location>-1) pathfinding.removeBorder(location);
 					endNode = new Node(e.getX() - xRollover, e.getY() - yRollover);
 				} else {
+					if(location>-1) pathfinding.removeBorder(location);
 					endNode.setXY(e.getX() - xRollover, e.getY() - yRollover);
 				}
 				repaint();
